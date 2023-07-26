@@ -107,6 +107,55 @@ pub fn instruction_decoder(instr: Vec<String>) -> String {
      * 0-------4  5-----6  7------11 12------16 17-----19 20----24 25-------31
      *  /rs3/      /00/      /rs2/     /rs1/      /rm/     /rd/     /opcode/
      * 
+     * RV32C Instruction Breakdown
+     * 
+     * CR-type
+     * 15-----12 11-----7 6--------2 1--------0
+     * /funct4/    /rs1/    /rs2/     /opcode/
+     * 0------3 4------8 9-------13 14--------15
+     * /funct4/   /rs1/    /rs2/      /opcode/
+     * 
+     * CI-type
+     * 15-----13 12---- 11-----7 6--------2 1--------0
+     *  /funct3/   /imm/  /rs1/    /imm/      /opcode/
+     * 0------2 3------ 4------8 9-------13 14--------15
+     * /funct3/   /imm/   /rs1/    /imm/      /opcode/
+     * 
+     * CSS-type
+     * 15-----13 12------7 6-------2 1--------0
+     * /funct3/    /imm/     /rs2/     /opcode/
+     * 0------2 3-------8 9-------13 14--------15
+     * /funct3/   /imm/     /rs2/      /opcode/
+     * 
+     * CIW-type
+     * 15-----13 12-------5 4------2 1--------0
+     * /funct3/     /imm/     /rd/    /opcode/
+     * 0------2 3--------10 11------13 14--------15
+     * /funct3/   /imm/        /rd/      /opcode/
+     * 
+     * CL-type
+     * 15-----13 12------10 9------7 6-------5 4------2 1--------0
+     * /funct3/    /imm/     /rs1/     /imm/     /rd/    /opcode/
+     * 0------2 3-------5 6------8 9------10 11-----13 14--------15
+     * /funct3/   /imm/     /rs1/     /imm/     /rd/     /opcode/
+     * 
+     * CS-type
+     * 15-----13 12------10 9--------7 6--------5 4--------2 1--------0
+     * /funct3/    /imm/     /rd/rs1/    /imm/      /rs2/     /opcode/
+     * 0------2 3-------5 6-------8 9-------10 11------13 14--------15
+     * /funct3/   /imm/     /rd/rs1/    /imm/      /rs2/     /opcode/
+     * 
+     * CB-type
+     * 15-----13 12------10 9--------7 6--------2 1--------0
+     * /funct3/    /imm/     /rs1/       /imm/     /opcode/
+     * 0------2 3-------5 6-------8 9-------13 14--------15
+     * /funct3/   /imm/     /rs1/       /imm/     /opcode/
+     * 
+     * CJ-type
+     * 15-----13 12-----------------2 1--------0
+     * /funct3/       /imm/             /opcode/
+     * 0------2 3-----------------13 14--------15
+     * /funct3/       /imm/             /opcode/
      */
 
     let opcode_slice = &instr[25..];    // opcode field
@@ -1627,7 +1676,7 @@ pub fn instruction_decoder(instr: Vec<String>) -> String {
                     return format!("FLW f{}, {}(x{})", rd_bits, imm_bits, rs1_bits);
                 }
                 "011" =>{
-                    println!("Load Double (FLD) instruction decoded");
+                    println!("Load Double (FLD) instruhttps://github.com/faisalill/open-runtimes/actions/runs/5663579481ction decoded");
                     println!("Destination Register address: f{}", rd_bits);
                     println!("Register One address: x{}", rs1_bits);
                     println!("Immendiate: {}", imm_bits);
