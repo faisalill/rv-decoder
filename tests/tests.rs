@@ -777,4 +777,196 @@ mod tests {
         let result = instruction_decoder(instr);
         assert_eq!(result, expected);
     }
+
+    #[test]
+    fn compression_instruction() {
+        // C.LWSP
+        let binary_instruction = "0101001111001010";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.LWSP x7, 176";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.SWSP
+        let binary_instruction = "1101001111001010";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.SWSP x18, 228";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.LW
+        let binary_instruction = "0100101101110100";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.LW x13, x14, 84";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.SW
+        let binary_instruction = "1100101101110100";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.SW x13, x14, 84";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.J
+        let binary_instruction = "1011110010010101";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.J -1420";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.JAL
+        let binary_instruction = "0011110010010101";  
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.JAL -1420";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.JR
+        let binary_instruction = "1000101010000010";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.JR x21";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.JALR
+        let binary_instruction = "1001101010000010";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.JALR x21";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.BEQZ
+        let binary_instruction = "1101010000100101";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.BEQZ x8, -152";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.BNEZ
+        let binary_instruction = "1111010000100101";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.BNEZ x8, -152";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.LI
+        let binary_instruction = "0100000010110101";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.LI x1, 13";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.LUI
+        let binary_instruction = "0110000010110101";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.LUI x1, 13";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.ADDI
+        let binary_instruction = "0001111111100101";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.ADDI x31, -7";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.ADDI16SP
+        let binary_instruction = "0110000101101001";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.ADDI16SP 208";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.ADDI4SPN
+        let binary_instruction = "0001001101001000";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.ADDI4SPN x10, 420";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.SLLI
+        let binary_instruction = "0001001111001010";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.SLLI x7, 50";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.SRLI
+        let binary_instruction = "1000000111101101";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.SRLI x11, 27";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.SRAI
+        let binary_instruction = "1000010111101101";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.SRAI x11, 27";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.ANDI
+        let binary_instruction = "1000100111101101";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.ANDI x11, 27";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.MV
+        let binary_instruction = "1000001010011010";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.MV x5, x6";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.ADD
+        let binary_instruction = "1001100011001010";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.ADD x17, x18";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.AND
+        let binary_instruction = "1000111111101001";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.AND x15, x10";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+        
+        // C.OR
+        let binary_instruction = "1000111111001001";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.OR x15, x10";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.XOR
+        let binary_instruction = "1000111110101001";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.XOR x15, x10";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.SUB
+        let binary_instruction = "1000111110001001";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.SUB x15, x10";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.NOP
+        let binary_instruction = "0000000000000001";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.NOP";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
+
+        // C.EBREAK
+        let binary_instruction = "1001000000000010";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.EBREAK";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);        
+    }
 }
