@@ -778,14 +778,14 @@ mod tests {
         assert_eq!(result, expected);
     }
 
-    // #[test]
-    // fn compression_instruction() {
-    //     // C.LWSP
-    //     let binary_instruction = "0101001111001010";
-    //     let instr = convert_binary_string_to_vector(binary_instruction);
-    //     let expected = "C.LWSP x7, 176";
-    //     let result = instruction_decoder(instr);
-    //     assert_eq!(result, expected);
+    #[test]
+    fn compression_instruction() {
+        // C.LWSP
+        let binary_instruction = "0101001111001010";
+        let instr = convert_binary_string_to_vector(binary_instruction);
+        let expected = "C.LWSP x7, 176";
+        let result = instruction_decoder(instr);
+        assert_eq!(result, expected);
 
         // C.SWSP
         // let binary_instruction = "1101001111001010";
@@ -968,5 +968,5 @@ mod tests {
         // let expected = "C.EBREAK";
         // let result = instruction_decoder(instr);
         // assert_eq!(result, expected);        
-    // }
+    }
 }
